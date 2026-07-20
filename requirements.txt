@@ -1,0 +1,12 @@
+stable-baselines3[extra]
+optuna
+pandas
+matplotlib
+seaborn
+gymnasium
+numpy
+scipy
+numba
+ipykernel
+tensorboard
+tqdm
