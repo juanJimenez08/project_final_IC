@@ -1,6 +1,6 @@
 # Projeto Final IC - Massive MIMO com Reinforcement Learning
 
-Este projeto treina e compara agentes de aprendizado por reforco para alocacao de potencia em um ambiente Massive MIMO. O notebook principal usa Stable-Baselines3 para treinar PPO, DQN e A2C em configuracoes padrao e com ajuste de hiperparametros via Optuna.
+Este projeto treina e compara agentes de aprendizado por reforco para alocacao de potencia em um ambiente Massive MIMO. O notebook principal usa Stable-Baselines3 para treinar PPO e DQN em configuracoes padrao e com ajuste de hiperparametros via Optuna, incluindo metricas de recompensa, taxa de downlink, potencia e SINR.
 
 ## Estrutura
 
@@ -38,8 +38,10 @@ Abra `run_vasco.ipynb` no Jupyter/VS Code/Colab e execute as celulas em ordem.
 
 No notebook:
 
-- `FAST_MODE = True` roda um teste rapido.
-- `FAST_MODE = False` roda a configuracao final, mais demorada.
+- `COLAB_FAST = True` roda uma configuracao mais rapida para Colab, reduzindo trials, timesteps e avaliacoes sem alterar o cenario MIMO principal.
+- `FAST_MODE = True` roda um smoke test ainda mais curto.
+- `COLAB_FAST = False` e `FAST_MODE = False` rodam a configuracao final, mais demorada.
+- Para usar GPU no Colab, selecione `Ambiente de execução > Alterar tipo de ambiente de execução > GPU`. PPO/DQN usam CUDA quando disponivel, mas a simulacao MIMO em NumPy continua majoritariamente na CPU.
 - Cada execucao cria um `RUN_ID` e salva artefatos em:
   - `results/runs/<RUN_ID>/`
   - `figures/runs/<RUN_ID>/`
@@ -54,16 +56,16 @@ O notebook gera tabelas como:
 - `summary_results.csv`
 - `evaluation_episodes.csv`
 - `stability_summary.csv`
+- `scenario_power_levels.csv`
 - `optuna_ppo_trials.csv`
 - `optuna_dqn_trials.csv`
-- `optuna_a2c_trials.csv`
 
 E graficos como:
 
 - curvas de aprendizado;
 - recompensa media e minima durante treino;
 - distribuicao das recompensas;
-- comparacao final de reward, downlink e potencia;
+- comparacao final de reward, downlink, potencia e SINR;
 - historico e importancia dos hiperparametros do Optuna.
 
 ## Observação
